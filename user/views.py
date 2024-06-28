@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from . import serializers
-from . import models
+from .serializers import EmployeeSerializer,EmployerSerializer
+from .models import EmployeeModel,EmployerModel
 # Create your views here.
 
 # class EmployeeView(ModelViewSet):
@@ -12,11 +12,11 @@ from . import models
 #     queryset = models.EmployeeModel.objects.all()
 
 
-class EmployeeView(APIView):
-    serializer_class = serializers.EmployeeSerializer
+class EmployeeRegistrationView(APIView):
+    serializer_class = EmployeeSerializer
 
     def post(self, request):
-        serializer = serializers.EmployeeSerializer(data=request.data)
+        serializer = EmployeeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -25,10 +25,31 @@ class EmployeeView(APIView):
 
 class EmployeeDetailView(APIView):
     def get(self, request, slug):
-        data = models.EmployeeModel.objects.all()
-        serializer = serializers.EmployeeSerializer(data, many=True)
+        data = EmployerModel.objects.all()
+        serializer = EmployerSerializer(data, many=True)
         if slug:
-            data = get_object_or_404(models.EmployeeModel, user__slug=slug)
-            serializer = serializers.EmployeeSerializer(data)
+            data = get_object_or_404(EmployeeModel, user__slug=slug)
+            serializer = EmployeeSerializer(data)
+        return Response(serializer.data)
+        # return Response(serializer.errors)
+
+
+class EmployerRegistrationView(APIView):
+    serializer_class = EmployerSerializer
+
+    def post(self, request):
+        serializer = EmployerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+class EmployerDetailView(APIView):
+    def get(self, request, slug):
+        data = EmployerModel.objects.all()
+        serializer = EmployerSerializer(data, many=True)
+        if slug:
+            data = get_object_or_404(EmployerModel, user__slug=slug)
+            serializer = EmployerSerializer(data)
         return Response(serializer.data)
         # return Response(serializer.errors)
