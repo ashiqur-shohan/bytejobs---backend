@@ -11,7 +11,7 @@ class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             return True
-        return obj.author == request.user
+        return obj.employer == request.user
 
 
 class JobView(viewsets.ModelViewSet):
@@ -19,5 +19,5 @@ class JobView(viewsets.ModelViewSet):
     serializer_class = JobSerializer
     # specifying which filter to be applied
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['title', 'comp_name', 'work_mode', 'work_type']
+    search_fields = ['title', 'comp_name', 'work_time', 'work_type']
     permission_classes = [IsOwnerOrReadOnly]
