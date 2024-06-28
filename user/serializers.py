@@ -93,3 +93,10 @@ class EmployerSerializer(serializers.ModelSerializer):
         employer.save()
 
         return employer
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(max_length=100)
+    class Meta:
+        model = CustomUserModel
+        fields = ['email', 'password']
