@@ -27,8 +27,12 @@ SECRET_KEY = 'django-insecure-t#8uyx=_a+bkm&s%&(%@v_lxy*o_u&)767j@ef&og4pc#n%o@9
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://learn-match-api.onrender.com', 'https://*.127.0.0.1']
+    'https://bytejobs-backend.onrender.com', 'https://*.127.0.0.1']
+
+CORS_ALLOWED_ORIGINS = ['https://bytejobs-backend.onrender.com']
+
 AUTH_USER_MODEL = 'user.CustomUserModel'
 
 # Application definition
