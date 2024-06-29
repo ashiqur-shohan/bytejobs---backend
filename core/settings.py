@@ -31,7 +31,8 @@ ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     'https://bytejobs-backend.onrender.com', 'https://*.127.0.0.1']
 
-CORS_ALLOWED_ORIGINS = ['https://bytejobs-backend.onrender.com']
+CORS_ALLOWED_ORIGINS = [
+    'https://bytejobs-backend.onrender.com', 'http://localhost:5173/']
 
 AUTH_USER_MODEL = 'user.CustomUserModel'
 
