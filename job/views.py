@@ -19,5 +19,5 @@ class JobView(viewsets.ModelViewSet):
     serializer_class = JobSerializer
     # specifying which filter to be applied
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['title', 'comp_name', 'work_time', 'work_type']
+    search_fields = ['title', 'employer__comp_name', 'work_time', 'work_type']
     permission_classes = [IsOwnerOrReadOnly]
